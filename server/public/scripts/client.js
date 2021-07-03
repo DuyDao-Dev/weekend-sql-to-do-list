@@ -1,18 +1,29 @@
 console.log('Client.js is ready');
 
-// $(document).ready(onReady);
+$(document).ready(onReady);
 
-// function onReady(){
-//   //add listeners
-//   $('#addTask').on('click', popUpInputWindow);
-//   $('.submitButton').on('click', )
-// };
+function onReady(){
+  //add listeners
+    $('#addTaskButton').on('click', getTask);
+};
 
-// function popUpInputWindow (){
-//     $('.bg-modal').style.display = 'flex';
-// };
+function getTask (){
+    let taskToSend = {
+        task: $('#taskInput').val(),
+        date: $('#dateInput').val(),
+        notes: $('#notesInput').val()
+    };
+    console.log('Posting to server', taskToSend);
 
-// document.getElementById('submitButton').addEventListener('click',
-//     function(){
-//         document.querySelector('modal-bg').style.display = 'flex';
-//     });
+    $.ajax({
+        method: 'POST',
+        url: "/toDoInfo",
+        data: taskToSend
+    }).then((response) => {
+        console.log(reponse);
+        //getTasks();
+    }).catch((error) => {
+        console.log(`Error when posting task`, error);
+        alert(`Erroring adding task. Please try again.`);
+    });
+}
