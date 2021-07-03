@@ -197,11 +197,11 @@ input {
 } */
 
 .modal-header{
-    background: orange;
+    background: rgb(73, 73, 223);
     color: #fff;
 }
 
-.required::after {
+.required:after {
     content: "*";
     color: red;
 }
