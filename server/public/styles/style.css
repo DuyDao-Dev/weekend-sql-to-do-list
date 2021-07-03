@@ -200,3 +200,8 @@ input {
     background: orange;
     color: #fff;
 }
+
+.required::after {
+    content: "*";
+    color: red;
+}
