@@ -11,13 +11,14 @@ function getTask (){
     let taskToSend = {
         task: $('#taskInput').val(),
         date: $('#dateInput').val(),
+        complete: ("#checkBoxComplete").val(),//create on GET append
         notes: $('#notesInput').val()
     };
     console.log('Posting to server', taskToSend);
 
     $.ajax({
         method: 'POST',
-        url: "/toDoInfo",
+        url: "/tododata",
         data: taskToSend
     }).then((response) => {
         console.log(reponse);
