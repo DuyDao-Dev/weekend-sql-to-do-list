@@ -12,7 +12,7 @@ function postTask (){
     let taskToSend = {
         task: $('#taskInput').val(),
         date: $('#dateInput').val(),
-        complete: (".checkbox").val(),//create on GET append
+        completed: false,
         notes: $('#notesInput').val()
     };
     console.log('Posting to server', taskToSend);
@@ -22,7 +22,7 @@ function postTask (){
         url: "/toDoList",
         data: taskToSend
     }).then((response) => {
-        console.log(reponse);
+        console.log(response);
         getTask();
     }).catch((error) => {
         console.log(`Error when posting task`, error);
@@ -47,9 +47,9 @@ function renderTasks(listOfTasks){
     for (let tasks of listOfTasks) {
         $('#list-items').append(`
         <li><input class='checkbox' type='checkbox' /> 
-        <span class='todo-text'>" + item + "</span>
+        <span class='todo-text'>${tasks}</span>
         <a class='remove text-right'><i class='fa fa-trash'></i></a><hr>
-        </li>");
+        </li>
         `)
     }
 };

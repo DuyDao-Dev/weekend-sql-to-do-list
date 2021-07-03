@@ -3,12 +3,12 @@ const express = require('express');
 const router = express.Router();
 
 router.post('/', (req,res) => {
-    console.log(req.body);
+    console.log(`What's coming in from the client?`,req.body);
     const newTask = req.body;
-        const queryText = `INSERT INTO toDoList ("task", "date", "complete", "notes");
+        const queryText = `INSERT INTO "toDoList" ("task", "date", "completed", "notes");
         VALUES ($1, $2, $3, $4);`;
-    pool.query(queryText,[newTask.task, newArtist.date, newTask.complete, newTask.notes])
-        .then(result => {
+    pool.query(queryText,[newTask.task, newTask.date, newTask.completed, newTask.notes])
+        .then((result) => {
             res.sendStatus(201);
         })
         .catch((err) => {
@@ -18,7 +18,7 @@ router.post('/', (req,res) => {
 });
 
 router.get('/', (req,res) => {
-        let queryText = 'SELECT * FROM toDoList;';
+        let queryText = 'SELECT * FROM "toDoList";';
     pool.query(queryText)
         .then((result) => {
         res.send(result.rows);
