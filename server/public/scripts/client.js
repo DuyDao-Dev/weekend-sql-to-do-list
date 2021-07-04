@@ -49,10 +49,19 @@ function renderTasks(listOfTasks){
         <li><input class='checkbox' type='checkbox' /> 
         <span class='todo-text'>${tasks.task}</span>
         <span class='todo-text'>${tasks.date}</span>
-        <span class='todo-text'>${tasks.complete}</span>
         <span class='todo-text'>${tasks.notes}</span>
         <a class='remove text-right'><i class='fa fa-trash'></i></a><hr>
         </li>
         `)
     }
 };
+
+function prettyDate(unformattedDate) {
+    const dateString = new Date(unformattedDate);
+    const year = dateString.getFullYear();
+    let month = (1 + dateString.getMonth()).toString() ;
+    let day = dateString.getDate().toString();
+    month = month.length === 1 ? '0' + month : month;
+    day = day.length === 1 ? '0' + day : day;
+    return month + '-' + day + '-' + year;
+} //end prettyDate
