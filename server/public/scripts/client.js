@@ -80,8 +80,12 @@ function updateTaskHandler(){
 //     $('.checkbox').checked = false;
 // }
 
-let taskCheck = $('.checkbox').checked = true|false;
-console.log(`What value is taskCheck?`,taskCheck);
+// let taskCheck = $('.checkbox').checked = true|false;
+// console.log(`What value is taskCheck?`,taskCheck);
+
+// let taskCheck = ($('.checkbox').checked = 1) ? true:false;
+
+let taskCheck = $('.checkbox').is('checked') ? 1 : 0;
 
 function updateTask(taskId){
   console.log('Task is ready to update');
