@@ -12,14 +12,14 @@ function postTask (){
     let taskToSend = {
         task: $('#taskInput').val(),
         date: $('#dateInput').val(),
-        completed: false,
+        complete: false,
         notes: $('#notesInput').val()
     };
     console.log('Posting to server', taskToSend);
 
     $.ajax({
         method: 'POST',
-        url: "/toDoList",
+        url: "/todolist",
         data: taskToSend
     }).then((response) => {
         console.log(response);
@@ -33,7 +33,7 @@ function postTask (){
 function getTask () {
     $.ajax({
         method: 'GET',
-        url: '/toDoList'
+        url: '/todolist'
     }).then((response) => {
         renderTasks(response);
     }).catch((error) => {
@@ -47,7 +47,10 @@ function renderTasks(listOfTasks){
     for (let tasks of listOfTasks) {
         $('#list-items').append(`
         <li><input class='checkbox' type='checkbox' /> 
-        <span class='todo-text'>${tasks}</span>
+        <span class='todo-text'>${tasks.task}</span>
+        <span class='todo-text'>${tasks.date}</span>
+        <span class='todo-text'>${tasks.complete}</span>
+        <span class='todo-text'>${tasks.notes}</span>
         <a class='remove text-right'><i class='fa fa-trash'></i></a><hr>
         </li>
         `)
