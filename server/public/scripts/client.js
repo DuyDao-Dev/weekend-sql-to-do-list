@@ -14,7 +14,7 @@ function postTask (){
     let taskToSend = {
         task: $('#taskInput').val(),
         date: $('#dateInput').val(),
-        complete: false, //$('.checkbox').checked = true|false
+        complete: false, 
         notes: $('#notesInput').val()
     };
     console.log('Posting to server', taskToSend);
