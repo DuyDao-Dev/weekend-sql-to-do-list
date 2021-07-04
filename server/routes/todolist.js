@@ -18,7 +18,7 @@ router.post('/', (req,res) => {
 });
 
 router.get('/', (req,res) => {
-        let queryText = 'SELECT * FROM "todolist";';
+        let queryText = 'SELECT * FROM todolist;';
     pool.query(queryText)
         .then((result) => {
         res.send(result.rows);
@@ -29,5 +29,24 @@ router.get('/', (req,res) => {
             res.sendStatus(500);
         });
 });
+
+
+router.put('/:id', (req, res) => {
+    // get id from url (which is from html)
+    const taskId = req.params.id;
+    
+    let putQuery = `UPDATE task SET "complete"=true WHERE id=$1;`;
+
+    pool.query(putQuery, [taskId])
+    .then(dbResponse => {
+        console.log('Updated task with PUT', dbResponse);
+        res.sendStatus(202);
+    })
+    .catch(err => {
+        console.log('There was an error updating transfer', error);
+        res.sendStatus(500);
+    })
+});
+
 
 module.exports = router;

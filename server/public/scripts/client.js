@@ -5,6 +5,8 @@ $(document).ready(onReady);
 function onReady(){
   //add listeners
     $('#addTaskButton').on('click', postTask);
+    $('#list-items').on('click', '.deleteTask', deleteTaskHandler);
+    $('#list-items').on('click', '.checkbox', updateTaskHandler);
     getTask();
 };
 
@@ -43,17 +45,76 @@ function getTask () {
 
 
 function renderTasks(listOfTasks){
-    $('#list-items').empty();
+    $('#list-items').empty();//ID from index.html line 30
     for (let tasks of listOfTasks) {
         $('#list-items').append(`
         <li><input class='checkbox' type='checkbox' /> 
         <span class='todo-text'>${tasks.task}</span>
         <span class='todo-text'>${tasks.date}</span>
         <span class='todo-text'>${tasks.notes}</span>
+        <td><button class="deleteTask" data-id=${tasks.id}>Delete</button></td>
         <a class='remove text-right'><i class='fa fa-trash'></i></a><hr>
         </li>
         `)
     }
+};
+
+
+//Update task with PUT
+function updateTaskHandler(){
+  updateTask($(this).data('id'));
+}
+
+//need a way to set checkbox to return with boolean statement.
+// let completeTask = ($('.checkbox').checked = true);
+//   if (completeTask = true) {
+//       return true;
+//   } else {
+//       return false;
+//   }
+function check() {
+    $('.checkbox').checked = true;
+}
+
+function uncheck() {
+    $('.checkbox').checked = false;
+}
+
+function updateTask(taskId){
+  console.log('Task is ready to update');
+    $.ajax({
+    method: 'PUT',
+    url: `/todolist/${taskId}`, //correct url? Rember to test
+    data: {} // How can I have my checkbox to activate 'complete' column to true?
+  })
+  .then(response => {
+    console.log(`Task status updated`, response);
+    getTask();
+  })
+  .catch(error => {
+    console.log(`Task status NOT updated`, error);
+  });
+}
+
+
+
+// DELETE
+function deleteTaskHandler() {
+  deleteTask($(this).data('id'));
+} 
+
+function deleteTask(taskId){
+    $.ajax({
+    method: 'DELETE',
+    url: `/todolist/${taskId}`, //correct url?
+  })
+  .then(response => {
+    console.log(`Task status updated`, response);
+    getKoalas();
+  })
+  .catch(error => {
+    console.log(`Task status NOT updated`, error);
+  });
 };
 
 // function prettyDate(unformattedDate) {
@@ -65,4 +126,4 @@ function renderTasks(listOfTasks){
 //     day = day.length === 1 ? '0' + day : day;
 //     return month + '-' + day + '-' + year;
 // } //end prettyDate. Need to figure out how to 
-//implement this to remove timestamp.
+//implement this to remove time stamp.
