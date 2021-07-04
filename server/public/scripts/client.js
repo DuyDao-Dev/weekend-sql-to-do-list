@@ -56,12 +56,13 @@ function renderTasks(listOfTasks){
     }
 };
 
-function prettyDate(unformattedDate) {
-    const dateString = new Date(unformattedDate);
-    const year = dateString.getFullYear();
-    let month = (1 + dateString.getMonth()).toString() ;
-    let day = dateString.getDate().toString();
-    month = month.length === 1 ? '0' + month : month;
-    day = day.length === 1 ? '0' + day : day;
-    return month + '-' + day + '-' + year;
-} //end prettyDate
+// function prettyDate(unformattedDate) {
+//     const dateString = new Date(unformattedDate);
+//     const year = dateString.getFullYear();
+//     let month = (1 + dateString.getMonth()).toString() ;
+//     let day = dateString.getDate().toString();
+//     month = month.length === 1 ? '0' + month : month;
+//     day = day.length === 1 ? '0' + day : day;
+//     return month + '-' + day + '-' + year;
+// } //end prettyDate. Need to figure out how to 
+//implement this to remove timestamp.
