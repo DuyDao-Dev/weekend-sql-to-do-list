@@ -14,7 +14,7 @@ function postTask (){
     let taskToSend = {
         task: $('#taskInput').val(),
         date: $('#dateInput').val(),
-        complete: false,
+        complete: $('.checkbox').checked = true|false,
         notes: $('#notesInput').val()
     };
     console.log('Posting to server', taskToSend);
@@ -72,20 +72,23 @@ function updateTaskHandler(){
 //   } else {
 //       return false;
 //   }
-function check() {
-    $('.checkbox').checked = true;
-}
+// function check() {
+//     $('.checkbox').checked = true;
+// }
 
-function uncheck() {
-    $('.checkbox').checked = false;
-}
+// function uncheck() {
+//     $('.checkbox').checked = false;
+// }
+
+let taskCheck = $('.checkbox').checked = true|false;
+console.log(`What value is taskCheck?`,taskCheck);
 
 function updateTask(taskId){
   console.log('Task is ready to update');
     $.ajax({
     method: 'PUT',
     url: `/todolist/${taskId}`, //correct url? Rember to test
-    data: {} // How can I have my checkbox to activate 'complete' column to true?
+    data: taskCheck // How can I have my checkbox to activate 'complete' column to true?
   })
   .then(response => {
     console.log(`Task status updated`, response);
