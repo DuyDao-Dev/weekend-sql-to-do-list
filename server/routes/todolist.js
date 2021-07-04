@@ -34,10 +34,9 @@ router.get('/', (req,res) => {
 router.put('/:id', (req, res) => {
     // get id from url (which is from html)
     const taskId = req.params.id;
-    
-    let putQuery = `UPDATE task SET "complete"=true WHERE id=$1;`;
+    let putQuery = `UPDATE todolist SET "complete"='TRUE' WHERE id=$1;`;
 
-    pool.query(putQuery, [taskId])
+  pool.query(putQuery, [taskId])
     .then(dbResponse => {
         console.log('Updated task with PUT', dbResponse);
         res.sendStatus(202);
@@ -46,6 +45,23 @@ router.put('/:id', (req, res) => {
         console.log('There was an error updating transfer', error);
         res.sendStatus(500);
     })
+});
+
+router.delete('/:id', (req,res) => {
+    const taskId = req.params.id;
+    console.log(`Task id is...${taskId}`);
+    const queryText = `
+    DELETE FROM todolist WHERE id = $1;`;
+
+  pool.query(queryText, [taskId])
+    .then(dbResponse => {
+      console.log(`Did we delete just one row? ${dbResponse.rowCount === 1}`);
+      res.sendStatus(200);
+    })
+    .catch(error => {
+      console.log(`Could not delete task with id ${taskId}.`, error);
+      res.sendStatus(500);
+    });
 });
 
 

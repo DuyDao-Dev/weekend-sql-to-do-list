@@ -14,7 +14,7 @@ function postTask (){
     let taskToSend = {
         task: $('#taskInput').val(),
         date: $('#dateInput').val(),
-        complete: $('.checkbox').checked = true|false,
+        complete: false, //$('.checkbox').checked = true|false
         notes: $('#notesInput').val()
     };
     console.log('Posting to server', taskToSend);
@@ -65,34 +65,11 @@ function updateTaskHandler(){
   updateTask($(this).data('id'));
 }
 
-//need a way to set checkbox to return with boolean statement.
-// let completeTask = ($('.checkbox').checked = true);
-//   if (completeTask = true) {
-//       return true;
-//   } else {
-//       return false;
-//   }
-// function check() {
-//     $('.checkbox').checked = true;
-// }
-
-// function uncheck() {
-//     $('.checkbox').checked = false;
-// }
-
-// let taskCheck = $('.checkbox').checked = true|false;
-// console.log(`What value is taskCheck?`,taskCheck);
-
-// let taskCheck = ($('.checkbox').checked = 1) ? true:false;
-
-let taskCheck = $('.checkbox').is('checked') ? 1 : 0;
-
 function updateTask(taskId){
   console.log('Task is ready to update');
     $.ajax({
     method: 'PUT',
-    url: `/todolist/${taskId}`, //correct url? Rember to test
-    data: taskCheck // How can I have my checkbox to activate 'complete' column to true?
+    url: `/todolist/${taskId}`, //correct url? Remember to tes
   })
   .then(response => {
     console.log(`Task status updated`, response);
@@ -117,7 +94,7 @@ function deleteTask(taskId){
   })
   .then(response => {
     console.log(`Task status updated`, response);
-    getKoalas();
+    getTask();
   })
   .catch(error => {
     console.log(`Task status NOT updated`, error);
