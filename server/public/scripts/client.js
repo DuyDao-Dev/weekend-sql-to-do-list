@@ -6,7 +6,7 @@ function onReady(){
   //add listeners
     $('#addTaskButton').on('click', postTask);
     $('#list-items').on('click', '.deleteTask', deleteTaskHandler);
-    $('#list-items').on('click', '.checkbox', updateTaskHandler);
+    $('#list-items').on('change', '.checkbox', updateTaskHandler);
     getTask();
 };
 
@@ -62,6 +62,11 @@ function renderTasks(listOfTasks){
 
 //Update task with PUT
 function updateTaskHandler(){
+    if ($(this).is(':checked')) {
+        console.log($(this).val() + ' is now checked');
+    } else {
+        console.log($(this).val() + ' is now unchecked');
+    }
   updateTask($(this).data('id'));
 }
 
