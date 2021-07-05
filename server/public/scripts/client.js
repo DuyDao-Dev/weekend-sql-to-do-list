@@ -6,7 +6,8 @@ function onReady(){
   //add listeners
     $('#addTaskButton').on('click', postTask);
     $('#list-items').on('click', '.deleteTask', deleteTaskHandler);
-    $('#list-items').on('change', '.checkbox', updateTaskHandler);
+    // $('#list-items').on('change', '.checkbox', updateTaskHandler);
+    $('.checkbox').on('change', updateTaskHandler);
     getTask();
 };
 
@@ -14,7 +15,7 @@ function postTask (){
     let taskToSend = {
         task: $('#taskInput').val(),
         date: $('#dateInput').val(),
-        complete: false, 
+        complete: $('.checkbox'), 
         notes: $('#notesInput').val()
     };
     console.log('Posting to server', taskToSend);
@@ -62,10 +63,13 @@ function renderTasks(listOfTasks){
 
 //Update task with PUT
 function updateTaskHandler(){
-    if ($(this).is(':checked')) {
-        console.log($(this).val() + ' is now checked');
-    } else {
-        console.log($(this).val() + ' is now unchecked');
+    // if ($(this).is(':checked')) {
+    //     console.log($(this).val() + ' is now checked');
+    // } else {
+    //     console.log($(this).val() + ' is now unchecked');
+    // }
+    if (this.checked){
+        return true;//testing if this.checked would work. It does not.
     }
   updateTask($(this).data('id'));
 }

@@ -32,11 +32,10 @@ router.get('/', (req,res) => {
 
 
 router.put('/:id', (req, res) => {
-    // get id from url (which is from html)
     const taskId = req.params.id;
     let putQuery = `
     UPDATE "todolist" 
-    SET "complete" = NOT "complete" 
+    SET "complete" = "TRUE" 
     WHERE id=$1;`;
 
   pool.query(putQuery, [taskId])
