@@ -48,7 +48,8 @@ function renderTasks(listOfTasks){
     $('#list-items').empty();//ID from index.html line 30
     for (let tasks of listOfTasks) {
         $('#list-items').append(`
-        <li><input class='checkbox' type='checkbox' /> 
+        <li><input class="checkbox" name="approval" type="checkbox" (change)="clickEvent($event)" [checked]="Model.IsApproved === 'Yes' ? true : false">
+        //tried adding an event within the input line above. Not working.
         <span class='todo-text'>${tasks.task}</span>
         <span class='todo-text'>${tasks.date}</span>
         <span class='todo-text'>${tasks.notes}</span>
@@ -62,13 +63,13 @@ function renderTasks(listOfTasks){
 
 //Update task with PUT
 function updateTaskHandler(){
-    if ($(this).is(':checked')) {
-        console.log($(this).val() + ' is now checked');
-        console.log(`What is this`, this);
-        //this is showing the input and class checkbox. So maybe that's why it's undefined?
-    } else {
-        console.log($(this).val() + ' is now unchecked');
-    }
+    // if ($(this).is(':checked')) {
+    //     console.log($(this).val() + ' is now checked');
+    //     console.log(`What is this`, this);
+    //     //this is showing the input and class checkbox. So maybe that's why it's undefined?
+    // } else {
+    //     console.log($(this).val() + ' is now unchecked');
+    // }
   updateTask($(this).data('id'));
 }
 
