@@ -6,8 +6,7 @@ function onReady(){
   //add listeners
     $('#addTaskButton').on('click', postTask);
     $('#list-items').on('click', '.deleteTask', deleteTaskHandler);
-    // $('#list-items').on('change', '.checkbox', updateTaskHandler);
-    $('.checkbox').on('change', updateTaskHandler);
+    $('#list-items').on('change', '.checkbox', updateTaskHandler);
     getTask();
 };
 
@@ -63,13 +62,12 @@ function renderTasks(listOfTasks){
 
 //Update task with PUT
 function updateTaskHandler(){
-    // if ($(this).is(':checked')) {
-    //     console.log($(this).val() + ' is now checked');
-    // } else {
-    //     console.log($(this).val() + ' is now unchecked');
-    // }
-    if (this.checked){
-        return true;//testing if this.checked would work. It does not.
+    if ($(this).is(':checked')) {
+        console.log($(this).val() + ' is now checked');
+        console.log(`What is this`, this);
+        //this is showing the input and class checkbox. So maybe that's why it's undefined?
+    } else {
+        console.log($(this).val() + ' is now unchecked');
     }
   updateTask($(this).data('id'));
 }

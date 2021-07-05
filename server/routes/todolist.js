@@ -43,7 +43,7 @@ router.put('/:id', (req, res) => {
         console.log('Updated task with PUT', dbResponse);
         res.sendStatus(202);
     })
-    .catch(err => {
+    .catch(error => {
         console.log('There was an error updating transfer', error);
         res.sendStatus(500);
     })
