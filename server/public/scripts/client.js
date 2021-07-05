@@ -6,7 +6,7 @@ function onReady(){
   //add listeners
     $('#addTaskButton').on('click', postTask);
     $('#list-items').on('click', '.deleteTask', deleteTaskHandler);
-    $('#list-items').on('change', '.checkbox', updateTaskHandler);
+    $('.checkbox').change(updateTaskHandler);
     getTask();
 };
 
@@ -14,7 +14,7 @@ function postTask (){
     let taskToSend = {
         task: $('#taskInput').val(),
         date: $('#dateInput').val(),
-        complete: $('.checkbox'), 
+        complete: result(), 
         notes: $('#notesInput').val()
     };
     console.log('Posting to server', taskToSend);
@@ -48,8 +48,7 @@ function renderTasks(listOfTasks){
     $('#list-items').empty();//ID from index.html line 30
     for (let tasks of listOfTasks) {
         $('#list-items').append(`
-        <li><input class="checkbox" name="approval" type="checkbox" (change)="clickEvent($event)" [checked]="Model.IsApproved === 'Yes' ? true : false">
-        //tried adding an event within the input line above. Not working.
+        <li><input class='checkbox' type='checkbox' /> 
         <span class='todo-text'>${tasks.task}</span>
         <span class='todo-text'>${tasks.date}</span>
         <span class='todo-text'>${tasks.notes}</span>
@@ -60,18 +59,16 @@ function renderTasks(listOfTasks){
     }
 };
 
-
+let result = '';
 //Update task with PUT
 function updateTaskHandler(){
-    // if ($(this).is(':checked')) {
-    //     console.log($(this).val() + ' is now checked');
-    //     console.log(`What is this`, this);
-    //     //this is showing the input and class checkbox. So maybe that's why it's undefined?
-    // } else {
-    //     console.log($(this).val() + ' is now unchecked');
-    // }
+    if (result = ''){
+        result = $this.val(true);
+    }else
+        result = $this.val(false);
   updateTask($(this).data('id'));
 }
+console.log(`What is the result?`, result)
 
 function updateTask(taskId){
   console.log('Task is ready to update');
