@@ -65,7 +65,7 @@ function updateTaskHandler(){
     if (result = ''){
         result = $this.val(true);
     }else
-        result = $this.val(false);
+        result = ($this.val() = false);
   updateTask($(this).data('id'));
 }
 console.log(`What is the result?`, result)
