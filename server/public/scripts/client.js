@@ -6,7 +6,7 @@ function onReady(){
   //add listeners
     $('#addTaskButton').on('click', postTask);
     $('#list-items').on('click', '.deleteTask', deleteTaskHandler);
-    $('.checkbox').change(updateTaskHandler);
+    $('input[type="checkbox"]').change(updateTaskHandler);
     getTask();
 };
 
@@ -14,7 +14,7 @@ function postTask (){
     let taskToSend = {
         task: $('#taskInput').val(),
         date: $('#dateInput').val(),
-        complete: result(), 
+        complete: status.val(), 
         notes: $('#notesInput').val()
     };
     console.log('Posting to server', taskToSend);
@@ -59,16 +59,15 @@ function renderTasks(listOfTasks){
     }
 };
 
-let result = '';
+let status = '';
 //Update task with PUT
 function updateTaskHandler(){
-    if (result = ''){
-        result = $this.val(true);
-    }else
-        result = ($this.val() = false);
-  updateTask($(this).data('id'));
+let id=$(this).attr('id');
+let value=$(this).val();
+let status= $(this).prop('checked');
+$('.checkbox').html(" id : " + id + ", value : " + value + ", Status : " + status );
+console.log(`What is the result?`, result);
 }
-console.log(`What is the result?`, result)
 
 function updateTask(taskId){
   console.log('Task is ready to update');
